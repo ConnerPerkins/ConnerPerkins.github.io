@@ -78,12 +78,23 @@ function initResumePreview(root = document){
   const linkWrapper = root.getElementById('resume-link');
   // If a static resume is bundled at assets/resume.pdf, show it by default.
   const staticPath = 'assets/resume.pdf';
-  try{
-    if(iframe){ iframe.src = staticPath; iframe.removeAttribute('hidden'); }
-    if(link && linkWrapper){ link.href = staticPath; linkWrapper.removeAttribute('hidden'); }
-  }catch(e){
-    // ignore any errors when setting src (browser may block local file access)
-  }
+  let currentURL = null;
+  // Fetch the PDF as a blob and load it into an object URL so the browser
+  // doesn't trigger a download due to server headers. This preserves an
+  // in-browser preview even if the server sets Content-Disposition: attachment.
+  fetch(staticPath).then(resp => {
+    if(!resp.ok) throw new Error('Resume not found');
+    return resp.blob();
+  }).then(blob => {
+    if(currentURL) URL.revokeObjectURL(currentURL);
+    currentURL = URL.createObjectURL(blob);
+    if(iframe){ iframe.src = currentURL; iframe.removeAttribute('hidden'); }
+    if(link && linkWrapper){ link.href = currentURL; linkWrapper.removeAttribute('hidden'); }
+  }).catch(()=>{
+    // If fetch fails (offline/file://), fall back to assigning the static path
+    // which may still display when served normally.
+    try{ if(iframe){ iframe.src = staticPath; iframe.removeAttribute('hidden'); } if(link && linkWrapper){ link.href = staticPath; linkWrapper.removeAttribute('hidden'); } }catch(e){}
+  });
 }
 
 document.addEventListener('DOMContentLoaded', ()=>{
