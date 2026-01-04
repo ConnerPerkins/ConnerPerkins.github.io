@@ -21,6 +21,20 @@ body{
   -moz-osx-font-smoothing:grayscale;
   line-height:1.5;
 }
+
+/* Decorative background image (fixed, behind content) */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0; /* top:0; right:0; bottom:0; left:0 */
+  background-image: url('../assets/FalseColorOrinoco.jpg');
+  background-size:cover;
+  background-position:center center;
+  opacity:0.5; /* 50% opacity as requested */
+  pointer-events:none; /* allow clicks through the decorative layer */
+  z-index:-1; /* behind page content */
+  filter:contrast(0.95) saturate(0.95);
+}
 .container{max-width:var(--max-width);margin:0 auto;padding:1rem}
 .header-inner{display:flex;align-items:center;justify-content:space-between;padding:0.5rem 0}
 .logo{font-weight:700;color:var(--text);text-decoration:none}
@@ -58,9 +72,7 @@ body{
 
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
-/* Resume preview and file input */
-.resume-input{background:transparent;border:1px dashed rgba(255,255,255,0.06);padding:0.5rem 0.75rem;border-radius:8px;color:var(--muted)}
-.resume-input::file-selector-button{background:transparent;border:none;color:var(--accent);cursor:pointer}
+/* Resume preview */
 #resume-preview{box-shadow:0 10px 30px rgba(2,6,23,0.6)}
 /* Contact */
 .contact{padding:2rem 0}

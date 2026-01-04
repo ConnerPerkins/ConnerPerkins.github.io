@@ -73,30 +73,16 @@ function initTabs(root = document){
 // initialize tabs inside the page
 // Resume preview helper
 function initResumePreview(root = document){
-  const input = root.getElementById('resume-upload');
   const iframe = root.getElementById('resume-preview');
   const link = root.getElementById('resume-download');
   const linkWrapper = root.getElementById('resume-link');
-  if(!input) return;
-  let currentURL = null;
-  input.addEventListener('change', ()=>{
-    const file = input.files && input.files[0];
-    if(!file) return;
-    if(currentURL) URL.revokeObjectURL(currentURL);
-    currentURL = URL.createObjectURL(file);
-    if(iframe){ iframe.src = currentURL; iframe.removeAttribute('hidden'); }
-    if(link && linkWrapper){ link.href = currentURL; linkWrapper.removeAttribute('hidden'); }
-  });
-
   // If a static resume is bundled at assets/resume.pdf, show it by default.
   const staticPath = 'assets/resume.pdf';
   // Check via fetch; if available, show the iframe and link. Works when served over HTTP.
   fetch(staticPath, { method: 'HEAD' }).then(resp => {
     if(resp.ok){
-      // Use the static path directly (no object URL revocation needed)
       if(iframe){ iframe.src = staticPath; iframe.removeAttribute('hidden'); }
       if(link && linkWrapper){ link.href = staticPath; linkWrapper.removeAttribute('hidden'); }
-      currentURL = null; // indicate using static resource
     }
   }).catch(()=>{
     // ignore errors (file missing or fetch blocked when opening file://)
