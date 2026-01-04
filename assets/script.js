@@ -78,15 +78,12 @@ function initResumePreview(root = document){
   const linkWrapper = root.getElementById('resume-link');
   // If a static resume is bundled at assets/resume.pdf, show it by default.
   const staticPath = 'assets/resume.pdf';
-  // Check via fetch; if available, show the iframe and link. Works when served over HTTP.
-  fetch(staticPath, { method: 'HEAD' }).then(resp => {
-    if(resp.ok){
-      if(iframe){ iframe.src = staticPath; iframe.removeAttribute('hidden'); }
-      if(link && linkWrapper){ link.href = staticPath; linkWrapper.removeAttribute('hidden'); }
-    }
-  }).catch(()=>{
-    // ignore errors (file missing or fetch blocked when opening file://)
-  });
+  try{
+    if(iframe){ iframe.src = staticPath; iframe.removeAttribute('hidden'); }
+    if(link && linkWrapper){ link.href = staticPath; linkWrapper.removeAttribute('hidden'); }
+  }catch(e){
+    // ignore any errors when setting src (browser may block local file access)
+  }
 }
 
 document.addEventListener('DOMContentLoaded', ()=>{
