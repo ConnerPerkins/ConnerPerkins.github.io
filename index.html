@@ -1,11 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>My GitHub Pages Site</title>
-</head>
-<body>
-  <h1>Hello World</h1>
-  <p>This website is hosted on GitHub Pages.</p>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Conner Perkins — Portfolio</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="logo" href="#">Conner Perkins</a>
+        <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+        <nav id="primary-nav" class="nav" aria-label="Primary Navigation">
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="container hero-inner">
+          <div class="hero-text">
+            <h1>Hi, I'm Conner.</h1>
+            <p>Frontend developer & designer building accessible, responsive web experiences.</p>
+            <p>
+              <a class="btn" href="#projects">See my work</a>
+              <a class="muted" href="#contact">Contact me</a>
+            </p>
+          </div>
+          <div class="hero-image">
+            <img src="assets/profile-placeholder.png" alt="Profile photo of Conner" />
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="container about">
+        <h2>About</h2>
+        <p>
+          I'm a web developer who focuses on clean interfaces and enjoyable user
+          experiences. I specialize in HTML, CSS, and JavaScript and enjoy
+          building accessible, high-performance sites.
+        </p>
+      </section>
+
+      <section id="showcase" class="container projects">
+        <h2>Showcase</h2>
+        <div class="tabs" id="project-tabs">
+          <div role="tablist" aria-label="Project tabs" class="tablist">
+            <button role="tab" aria-selected="true" aria-controls="panel-resume" id="tab-resume" class="tab">Resume</button>
+            <button role="tab" aria-selected="false" aria-controls="panel-p1" id="tab-p1" class="tab">Project 1</button>
+            <button role="tab" aria-selected="false" aria-controls="panel-p2" id="tab-p2" class="tab">Project 2</button>
+            <button role="tab" aria-selected="false" aria-controls="panel-p3" id="tab-p3" class="tab">Project 3</button>
+          </div>
+
+          <div class="tabpanels">
+            <div id="panel-resume" role="tabpanel" tabindex="0" aria-labelledby="tab-resume" class="tabpanel">
+              <div class="card">
+                <img src="assets/profile-placeholder.svg" alt="Profile placeholder" />
+                <h3>Resume</h3>
+                <p class="muted">Upload a PDF resume to preview it here, or use the link to open/download.</p>
+                <p>
+                  <label class="sr-only" for="resume-upload">Upload resume PDF</label>
+                  <input id="resume-upload" class="resume-input" type="file" accept="application/pdf" />
+                </p>
+                <div id="resume-link" hidden>
+                  <a id="resume-download" class="btn small" href="#" target="_blank" rel="noopener">Open PDF in new tab</a>
+                </div>
+                <iframe id="resume-preview" title="Resume preview" hidden style="width:100%;height:480px;border-radius:8px;border:0;margin-top:1rem"></iframe>
+              </div>
+            </div>
+
+            <div id="panel-p1" role="tabpanel" tabindex="0" aria-labelledby="tab-p1" class="tabpanel" hidden>
+              <div class="card">
+                <img src="assets/project1.svg" alt="Project 1 placeholder" />
+                <h3>Project One</h3>
+                <p class="muted">A short description of this project and the tech used.</p>
+                <p><a class="btn small" href="#">View</a></p>
+              </div>
+            </div>
+
+            <div id="panel-p2" role="tabpanel" tabindex="0" aria-labelledby="tab-p2" class="tabpanel" hidden>
+              <div class="card">
+                <img src="assets/project2.svg" alt="Project 2 placeholder" />
+                <h3>Project Two</h3>
+                <p class="muted">Brief summary of the project and the problem it solved.</p>
+                <p><a class="btn small" href="#">View</a></p>
+              </div>
+            </div>
+
+            <div id="panel-p3" role="tabpanel" tabindex="0" aria-labelledby="tab-p3" class="tabpanel" hidden>
+              <div class="card">
+                <img src="assets/project3.svg" alt="Project 3 placeholder" />
+                <h3>Project Three</h3>
+                <p class="muted">Notes about the project, stack, and interesting details.</p>
+                <p><a class="btn small" href="#">View</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="container contact">
+        <h2>Contact</h2>
+        <p>
+          Interested in working together? Email me at
+          <a href="mailto:you@example.com">you@example.com</a> or connect on
+          <a href="#">LinkedIn</a>.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2026 Conner Perkins — Built with HTML &amp; CSS.</p>
+      </div>
+    </footer>
+
+    <script src="assets/script.js"></script>
+  </body>
 </html>
